@@ -113,8 +113,11 @@ curl -X GET http://localhost:8080/api/protected \
 
 | Método | Endpoint               | Descripción                     | Rol Requerido |
 |--------|------------------------|---------------------------------|---------------|
-| POST   | /api/auth/register     | Registrar nuevo usuario         | -             |
-| POST   | /api/auth/login        | Iniciar sesión                  | -             |
+| POST   | /register              | Registrar nuevo usuario         | -             |
+| POST   | /login                 | Iniciar sesión                  | -             |
+
+
+PRONTO
 | GET    | /api/users             | Listar usuarios                 | admin         |
 | GET    | /api/users/:id         | Obtener usuario por ID          | admin         |
 | PUT    | /api/users/:id         | Actualizar usuario              | admin         |
