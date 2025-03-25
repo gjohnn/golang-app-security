@@ -28,8 +28,6 @@ quick-resto-go/
 ├── routes/
 ├── utils/
 ├── .env.example
-├── docker-compose.yml
-├── Dockerfile
 ├── go.mod
 ├── go.sum
 └── main.go
@@ -124,10 +122,8 @@ curl -X GET http://localhost:8080/api/protected \
 
 ## Middlewares Implementados
 
-- **AuthMiddleware**: Verifica token JWT
-- **RoleMiddleware**: Control de acceso por roles
+- **AuthMiddleware**: Verifica token JWT y los roles
 - **LoggerMiddleware**: Registro de peticiones
-- **RecoverMiddleware**: Manejo de panics
 
 ## Migración de Base de Datos
 
