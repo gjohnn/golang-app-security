@@ -105,7 +105,7 @@ curl -X POST http://localhost:8080/login \
 
 ### Acceso a Ruta Protegida
 ```bash
-curl -X GET http://localhost:8080/api/protected \
+curl -X GET http://localhost:8080/protected \
   -H "Authorization: Bearer <TU_TOKEN_JWT>"
 ```
 
@@ -117,7 +117,7 @@ curl -X GET http://localhost:8080/api/protected \
 | POST   | /login                 | Iniciar sesión                  | -             |
 
 
-PRONTO
+-------------------------------------- PRONTO --------------------------------------
 | GET    | /api/users             | Listar usuarios                 | admin         |
 | GET    | /api/users/:id         | Obtener usuario por ID          | admin         |
 | PUT    | /api/users/:id         | Actualizar usuario              | admin         |
@@ -127,34 +127,6 @@ PRONTO
 
 - **AuthMiddleware**: Verifica token JWT y los roles
 - **LoggerMiddleware**: Registro de peticiones
-
-## Migración de Base de Datos
-
-Los modelos se migran automáticamente al iniciar la aplicación. Para forzar una recreación:
-
-```bash
-docker-compose down -v
-docker-compose up -d --build
-```
-
-## Documentación API
-
-Para generar documentación Swagger (opcional):
-
-1. Instalar swag:
-```bash
-go install github.com/swaggo/swag/cmd/swag@latest
-```
-
-2. Generar docs:
-```bash
-swag init -g main.go
-```
-
-3. Acceder a:
-```
-http://localhost:8080/swagger/index.html
-```
 
 ## Contribución
 
