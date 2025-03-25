@@ -1,0 +1,66 @@
+# Archivos binarios y ejecutables
+/bin/
+/main
+/quick-resto-go
+
+# Archivos de entorno
+.env
+.env.local
+
+# Directorios de dependencias
+/vendor/
+
+# Archivos de IDE y editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# Archivos de desarrollo y debug
+debug
+*.test
+*.prof
+*.out
+
+# Archivos generados por Swagger
+/docs/
+
+# Archivos de base de datos local
+*.db
+*.sqlite
+/dbdata/
+
+# Logs
+*.log
+/logs/
+
+# Archivos de cobertura
+coverage.txt
+*.cover
+
+# Archivos generados por Go
+/go.sum
+/go.mod
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Archivos de compilación de Go
+/pkg/
+/dist/
+
+# Archivos temporales
+tmp/
+temp/
+
+# Archivos específicos de macOS
+.DS_Store
+._*
+
+# Archivos específicos de Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
