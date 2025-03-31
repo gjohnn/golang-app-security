@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"v0/database"
@@ -23,13 +24,14 @@ func (cv *CustomValidator) Validate(i interface{}) error {
 }
 
 func main() {
+
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
 	db, err := database.InitDB()
 	if err != nil {
-		panic("failed to connect database")
+		panic(fmt.Sprintf("failed to connect database: %v", err))
 	}
 
 	authService := services.NewAuthService(db)

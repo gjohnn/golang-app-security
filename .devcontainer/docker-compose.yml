@@ -8,30 +8,28 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    env_file:
-      - .env  # Carga variables para la aplicación
+
     volumes:
       - ../..:/workspaces:cached
-    depends_on:
-      - db  # Asegura que la DB inicie primero
-    restart: unless-stopped  # Mejor manejo de reinicios
+
+    # Evita que el contenedor se detenga inmediatamente
     command: sleep infinity
+
+    # Usa la misma red que la DB, permitiendo "forwardPorts" en devcontainer.json
     network_mode: service:db
 
   db:
-    image: postgres:latest 
+    image: postgres:latest
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:  # Mejor especificar aquí las credenciales
+
+    environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-      TZ: UTC  # Zona horaria explícita
-    healthcheck:  # Verificación de salud
-      test: ["CMD-SHELL", "pg_isready -U postgres_user -d app_database"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      TZ: UTC  # Define la zona horaria explícitamente
+
+    ports:
+      - "5423:5432"  # Expose PostgreSQL default port 5432 on 5423
+

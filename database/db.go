@@ -2,21 +2,39 @@ package database
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"v0/models"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func InitDB() (*gorm.DB, error) {
+	// Load environment variables from .env file
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	// Get environment variables with fallback error handling
+	postgresHost := os.Getenv("POSTGRES_HOST")
+	postgresUser := os.Getenv("POSTGRES_USER")
+	postgresPassword := os.Getenv("POSTGRES_PASSWORD")
+	postgresDB := os.Getenv("POSTGRES_DB")
+	postgresPort := os.Getenv("POSTGRES_PORT")
+
+	if postgresHost == "" || postgresUser == "" || postgresPassword == "" || postgresDB == "" || postgresPort == "" {
+		return nil, fmt.Errorf("missing one or more required environment variables")
+	}
+
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("POSTGRES_HOST"),
-		os.Getenv("POSTGRES_USER"),
-		os.Getenv("POSTGRES_PASSWORD"),
-		os.Getenv("POSTGRES_DB"),
-		os.Getenv("POSTGRES_PORT"),
+		postgresHost,
+		postgresUser,
+		postgresPassword,
+		postgresDB,
+		postgresPort,
 	)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -28,7 +46,7 @@ func InitDB() (*gorm.DB, error) {
 		&models.User{},
 	}
 
-	// Ejecutar la migración para todos los modelos de modelsToMigrate
+	// Run migrations for all models in modelsToMigrate
 	for _, model := range modelsToMigrate {
 		if err := db.AutoMigrate(model); err != nil {
 			return nil, err
